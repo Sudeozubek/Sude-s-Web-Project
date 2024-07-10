@@ -1,6 +1,6 @@
 - 👋 Hi, I’m @Sudeozubek
 - 👀 I’m interested in software development
-- 🌱 I’m currently learning python, c++, dart
+- 🌱 I’m currently learning python, c++, javascript
 - 📫 How to reach me : ???
 
 <!---
