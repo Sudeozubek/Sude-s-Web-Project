@@ -13,17 +13,86 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   window.addEventListener('scroll', revealSection);
-  revealSection(); // Sayfa yüklendiğinde çalıştır
+  revealSection(); 
 });
+
+// Hero section için scroll animasyonu
+document.addEventListener('DOMContentLoaded', () => {
+  const heroSection = document.querySelector('.hero');
+  if (heroSection) { // Null check eklendi
+    const revealHero = () => {
+      const sectionTop = heroSection.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      if (sectionTop < windowHeight - 100) {
+        heroSection.classList.add('show');
+      }
+    };
+    window.addEventListener('scroll', revealHero);
+    revealHero();
+  }
+});
+
+// About section için scroll animasyonu
+document.addEventListener('DOMContentLoaded', () => {
+  const aboutSection = document.querySelector('#about');
+  if (aboutSection) { // Null check eklendi
+    const revealAbout = () => {
+      const sectionTop = aboutSection.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+      if (sectionTop < windowHeight - 100) {
+        aboutSection.classList.add('show');
+      }
+    };
+    window.addEventListener('scroll', revealAbout);
+    revealAbout();
+  }
+});
+
+// Carousel işlemleri
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.querySelector('.carousel-track');
+  const prevButton = document.querySelector('.prev');
+  const nextButton = document.querySelector('.next');
+  
+  if (track && prevButton && nextButton) { // Null check eklendi
+    const items = Array.from(track.children);
+    if (items.length > 0) { // items array'inin boş olmadığından emin oluyoruz
+      let currentIndex = 0;
+
+      const updateTrackPosition = () => {
+        const itemWidth = items[0].getBoundingClientRect().width;
+        track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+      };
+
+      prevButton.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateTrackPosition();
+        }
+      });
+
+      nextButton.addEventListener('click', () => {
+        if (currentIndex < items.length - 1) {
+          currentIndex++;
+          updateTrackPosition();
+        }
+      });
+
+      // İlk yüklemede pozisyonu ayarla
+      updateTrackPosition();
+    }
+  }
+});
+
 
 
 // Form Gönderimi İşlevselliği
 const form = document.querySelector('form');
 if (form) {
   form.addEventListener('submit', (e) => {
-    e.preventDefault(); // Formun varsayılan yenileme davranışını engelle
-    alert('Mesajınız başarıyla gönderildi!'); // Başarı mesajı
-    form.reset(); // Form alanlarını sıfırla
+    e.preventDefault(); 
+    alert('Mesajınız başarıyla gönderildi!'); 
+    form.reset(); 
   });
 }
 
@@ -32,25 +101,25 @@ const heroContent = document.querySelector('.hero-content');
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
   if (heroContent) {
-    heroContent.style.transform = `translateY(${scrollY * 0.2}px)`; // Hafif yukarı hareket
+    heroContent.style.transform = `translateY(${scrollY * 0.2}px)`;
   }
 });
 
 // Navbar bağlantılarına dinamik kaydırma ekle
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
-    e.preventDefault(); // Varsayılan tıklama davranışını engelle
+    e.preventDefault(); 
 
-    const targetId = this.getAttribute('href').substring(1); // Bağlantının hedef ID'sini al
+    const targetId = this.getAttribute('href').substring(1); 
     const targetSection = document.getElementById(targetId);
 
     if (targetSection) {
-      const navbarHeight = document.querySelector('.navbar').offsetHeight; // Navbar yüksekliği
-      const targetPosition = targetSection.offsetTop - navbarHeight; // Offset ekle
+      const navbarHeight = document.querySelector('.navbar').offsetHeight;
+      const targetPosition = targetSection.offsetTop - navbarHeight; 
 
       window.scrollTo({
         top: targetPosition,
-        behavior: 'smooth' // Yumuşak kaydırma
+        behavior: 'smooth' 
       });
     }
   });
@@ -70,17 +139,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Eğer kullanıcı tercihi yoksa banner'ı açık tut
   if (!savedPreferences) {
-    cookieBanner.style.display = 'flex'; // Banner'ı görünür yap
+    cookieBanner.style.display = 'flex'; 
   }
 
   // Çerez Ayarları butonuna tıklayınca modal açılır
   cookieSettingsButton.addEventListener('click', () => {
-    cookieModal.classList.remove('hidden'); // Modalı görünür yap
+    cookieModal.classList.remove('hidden'); 
   });
 
   // Modal Kapatma
   closeModalButton.addEventListener('click', () => {
-    cookieModal.classList.add('hidden'); // Modalı gizle
+    cookieModal.classList.add('hidden'); 
   });
 
   // Tüm Çerezleri Kabul Et
@@ -91,21 +160,21 @@ document.addEventListener('DOMContentLoaded', () => {
       marketing: true,
     };
     localStorage.setItem('cookiePreferences', JSON.stringify(allPreferences));
-    cookieBanner.style.display = 'none'; // Banner'ı tamamen gizle
+    cookieBanner.style.display = 'none'; 
     alert('Tüm çerezler kabul edildi.');
   });
 
   // Çerez Ayarlarını Kaydetme
   saveCookiesButton.addEventListener('click', () => {
     const preferences = {
-      essential: true, // Her zaman zorunlu
+      essential: true, 
       analytics: cookieForm.analytics.checked,
       marketing: cookieForm.marketing.checked,
     };
 
     localStorage.setItem('cookiePreferences', JSON.stringify(preferences));
-    cookieModal.classList.add('hidden'); // Modalı gizle
-    cookieBanner.style.display = 'none'; // Banner'ı tamamen gizle
+    cookieModal.classList.add('hidden'); 
+    cookieBanner.style.display = 'none'; 
     alert('Çerez ayarlarınız kaydedildi.');
   });
 });
