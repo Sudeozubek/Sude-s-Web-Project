@@ -1,0 +1,97 @@
+/* === GENEL AYARLAR === */
+:root {
+  --background: #F5F5F5; 
+  --primary: #D4A5FF; 
+  --secondary: #AEEBFF; 
+  --text-dark: #444; 
+  --text-light: #666; 
+  --white: #FFFFFF; 
+  --shadow: rgba(0, 0, 0, 0.1);
+  --background: #f8f9fa;
+  --text-dark: #333;    
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: var(--background);
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/*logo*/
+.logo img {
+  height: 70px; 
+  width: auto; 
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.navbar.scrolled .logo img {
+  opacity: 0.5;
+  transform: scale(0.9); 
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .logo img {
+    height: 40px;
+  }
+}
+
+/* === NAVBAR === */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: black;
+  padding: 0px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px var(--shadow);
+  z-index: 1000;
+  background: rgb(0, 0, 0); 
+  transition: background 0.3s ease;
+}
+
+.navbar.scrolled {
+  background: rgba(114, 113, 113, 0.529)!important; 
+}
+
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.nav-links a:hover {
+  background: var(--secondary);
+  color: var(--white);
+}
